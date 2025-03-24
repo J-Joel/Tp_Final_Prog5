@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+:root{
+    --primary-color: #ff4757;
+    --secodary-color: #000000;
+    --white-color: #ffffff;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+*,::before,::after{
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    color: inherit !important;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: var(--white-color)!important;
+    background-image: linear-gradient(to right, 
+    rgb(40, 40, 40), 
+    rgb(220, 220, 220),
+    rgb(40, 40, 40)
+    );
+}
+
+/* Efecto de seguimiento circular(Nececita js) */
+.nav-link{
+    background: radial-gradient(130px at var(--x,0) var(--y,0),white,rgba(0, 0, 0, 0.2)), transparent;
+    -webkit-background-clip: text;
+}
+.nav-link:hover{ /* Cuando pasa el mouse sobre un link */
+    color:rgba(0, 0, 0, 0) !important;
+}
+/************************************************************ Navbar Menu ****************************************************************/
+/* Contenedor del div (Contiene todos los elementos, menos el nav) */
+.navmenu {
+    display: flex;
+    position: absolute;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    width: 100%;
+    height: 70vh;
+    user-select: none;
+    /*height: 100vh;*/
+}
+/********************************************* Boton Central ********************************************************/
+/* Boton formato label */
+.navmenu .central {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    /* top: 98px; */
+    cursor: pointer;
+    transition: top 2s, border-radius 1s, background-color .3s;
+    z-index: 99;
+}
+/* Primera capa del boton */
+.navmenu .central::before {
+    content: '';
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    background-image: linear-gradient(to bottom, transparent 25%, rgba(255,255,255));
+    transition: border-radius 1s, background-color .3s;
+    z-index: -2;
+}
+/* Segunda capa del boton */
+.navmenu .central::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    backdrop-filter: blur(15px);
+    border-radius: 50%;
+    background-image: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 1));
+    transition: border-radius 1s, background-color .3s;
+    z-index: -1;
+}
+
+/* Efecto de la segunda capa sobre el boton */
+.navmenu .central:hover::after{
+    transition: border-radius 1s, background-color .3s;
+    filter: drop-shadow(0 0 10px var(--white-color));
+    background-image: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 1));
+}
+/* Desaparece los iconos del boton, si el boton es presionado(Interactua un checkbox oculto) */
+.navmenu .central .close,
+.navmenu > input:checked ~ .central .open {
+    display: none;
+}
+/* Muestra el boton de cerrar al checkear el checkbox  */
+.navmenu > input:checked ~ .central .close { /* ~ == alt + 126 */
+    display: block;
+    color: var(--white-color);
+    opacity: 1;
+}
+.navmenu > input:checked ~ .central::before {
+    background-image: linear-gradient(to bottom, transparent 5%, var(--white-color));
+}
+/********************************************************************************************************************/
+/********************************************************* Submenu ****************************************************************/
+/* Contenedor de la lista */
+.navmenu ul.submenu {
+    display: flex;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: rotate(0deg);
+    visibility: hidden;
+    transition: visibility .5s;
+    transition: all 3s ease;
+}
+/* Al presionar el boton el menu aparece y se reposiciona */
+.navmenu > input:checked ~ ul.submenu {
+    visibility: inherit;
+}
+
+/* Propiedades de cada item de la lista */
+.navmenu ul.submenu li {
+    --item: 0;
+    right: 50%;
+    position: absolute;
+    width: 130px;
+    height: 60px;
+    transform: rotate(calc(22.5deg * var(--item))) translateX(120px);
+    transform-origin: right center;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: all 3s ease, transform .7s, opacity .2s;
+}
+
+/* Al precionar el boton los elementos de la lista se posicionan de forma circular */
+.navmenu > input:checked ~ ul.submenu li {
+    transform: rotate(calc((-360deg / 16) * var(--item))) translateX(0);
+    opacity: 1;
+}
+/* Elemento a(que contiene el texto y icono) */
+.navmenu ul.submenu li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+/* Contenedor del elemento i(imagen)  */
+.navmenu ul.submenu li a div {
+    position:  relative;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: var(--white-color);
+    z-index: 1;
+}
+/* Primera capa del contenedor de imagen */
+.navmenu ul.submenu li a div::before {
+    content: '';
+    font-size: 20px;
+    position: absolute;
+    width: inherit;
+    height: calc(100% - 20px);
+    background-color: rgb(255, 255, 255);
+    transition: background-color .3s, filter 3s .3s;
+    opacity: 0;
+    z-index: -2;
+}
+/* Segunda capa del contenedor de imagen */
+.navmenu ul.submenu li a div::after {
+    content: '';
+    font-size: 20px;
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 50%;
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: background-color .3s;
+    z-index: -1;
+}
+
+/* Cuando se pasa el mouse por el elemnto a, el contenedor de la imagen cambia */
+.navmenu ul.submenu li a:hover div {
+    transition: filter 3s .3s;
+    filter: drop-shadow(0 0 5px var(--white-color));
+}
+/* Cambia la segunda capa */
+.navmenu ul.submenu li a:hover div::after {
+    background: radial-gradient(circle, var(--white-color), rgba(0, 0, 0, 1));
+}
+/* Cambia la primera capa */
+.navmenu ul.submenu li a:hover div::before {
+    transition: opacity .3s, transform 3s, height 4s;
+    transform: rotate(360deg);
+    height: calc(100% + 4px);
+    opacity: 1;
+}
+
+/* Contenedor del texto */
+.navmenu ul.submenu li a i {
+    --item: 0;
+    transform: rotate(calc(22.5deg * var(--item)));
+}
+.navmenu ul.submenu li a span {
+    --item: 0;
+    position: absolute;
+    display: flex;
+    right:  calc(100%);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 15px;
+    padding: 0 10px;
+    color: var(--white-color);
+    border-radius: 20px;
+    z-index: -1;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: transform .3s .4s, opacity .2s .4s;
+}
+
+/* (IF CSS) [Desde el elemento] > [Elemento hijo del elemento] ~ [Elemento hermano del elemento hijo y hijo del elemento, elemento objetivo] */
+/* El contenedor del texto aparece y se modifica al presiona el boton */
+.navmenu > input:checked ~ ul.submenu li a span {
+    transform: rotate(calc(22.5deg * var(--item))) translateX(0px);
+    opacity: 1;
+}
+
+/* Primera capa del contenedor span */
+.navmenu ul.submenu li a span::before {
+    content: '';
+    position: absolute;
+    width: calc(100% - 3px);
+    height: calc(100% - 3px);
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    z-index: -1;
+    transition: background-color .3s, opacity .3s;
+}
+
+/* Segunda capa del contenedor */
+.navmenu ul.submenu li a span::after {
+    content: '';
+    position: absolute;
+    width: calc(100%);
+    height: calc(100% - 10px);
+    background-color: rgb(255, 255, 255);
+    opacity: 0;
+    border-radius: 25px;
+    z-index: -2;
+    transition: background-color 2s;
+}
+
+/* Cuando se pasa el cursor sobre el contenedor del icono o texto, el span cambia */
+.navmenu ul.submenu li a:hover span {
+    transition: filter 3s .3s;
+    filter: drop-shadow(0 0 10px var(--white-color));
+}
+.navmenu ul.submenu li a:hover span::before {
+    background-color: rgba(0, 0, 0, 1);
+}
+.navmenu ul.submenu li a:hover span::after {
+    transition: opacity .3s, transform 3s, height 4s, background-color 2s;
+    opacity: 1;
+    height: calc(100%);
+    transform: rotate(360deg);
+}
+
+/* Ajusta la rotacion de los iconos individualmente */
+/* Por cada item ubicado en la clase submenu, se ajusta la propiedad del item */
+.navmenu ul.submenu li:nth-child(2) a span,
+.navmenu ul.submenu li:nth-child(2) a i,
+.navmenu ul.submenu li:nth-child(2) {
+    --item: 1;
+}
+.navmenu ul.submenu li:nth-child(3) a span,
+.navmenu ul.submenu li:nth-child(3) a i,
+.navmenu ul.submenu li:nth-child(3) {
+    --item: 2;
+}
+.navmenu ul.submenu li:nth-child(4) a span,
+.navmenu ul.submenu li:nth-child(4) a i,
+.navmenu ul.submenu li:nth-child(4) {
+    --item: 3;
+}
+.navmenu ul.submenu li:nth-child(5) a span,
+.navmenu ul.submenu li:nth-child(5) a i,
+.navmenu ul.submenu li:nth-child(5) {
+    --item: 4;
+}
+.navmenu ul.submenu li:nth-child(6) a span,
+.navmenu ul.submenu li:nth-child(6) a i,
+.navmenu ul.submenu li:nth-child(6) {
+    --item: 5;
+}
+.navmenu ul.submenu li:nth-child(7) a span,
+.navmenu ul.submenu li:nth-child(7) a i,
+.navmenu ul.submenu li:nth-child(7) {
+    --item: 6;
+}
+.navmenu ul.submenu li:nth-child(8) a span,
+.navmenu ul.submenu li:nth-child(8) a i,
+.navmenu ul.submenu li:nth-child(8) {
+    --item: 7;
+}
+.navmenu ul.submenu li:nth-child(9) a span,
+.navmenu ul.submenu li:nth-child(9) a i,
+.navmenu ul.submenu li:nth-child(9) {
+    --item: 8;
+}
+.navmenu ul.submenu li:nth-child(10) a span,
+.navmenu ul.submenu li:nth-child(10) a i,
+.navmenu ul.submenu li:nth-child(10) {
+    --item: 9;
+}
+.navmenu ul.submenu li:nth-child(11) a span,
+.navmenu ul.submenu li:nth-child(11) a i,
+.navmenu ul.submenu li:nth-child(11) {
+    --item: 10;
+}
+.navmenu ul.submenu li:nth-child(12) a span,
+.navmenu ul.submenu li:nth-child(12) a i,
+.navmenu ul.submenu li:nth-child(12) {
+    --item: 11;
+}
+.navmenu ul.submenu li:nth-child(13) a span,
+.navmenu ul.submenu li:nth-child(13) a i,
+.navmenu ul.submenu li:nth-child(13) {
+    --item: 12;
+}
+.navmenu ul.submenu li:nth-child(14) a span,
+.navmenu ul.submenu li:nth-child(14) a i,
+.navmenu ul.submenu li:nth-child(14) {
+    --item: 13;
+}
+.navmenu ul.submenu li:nth-child(15) a span,
+.navmenu ul.submenu li:nth-child(15) a i,
+.navmenu ul.submenu li:nth-child(15) {
+    --item: 14;
+}
+.navmenu ul.submenu li:nth-child(16) a span,
+.navmenu ul.submenu li:nth-child(16) a i,
+.navmenu ul.submenu li:nth-child(16) {
+    --item: 15;
+}
+/******************************************************************************************************************************************/
+/***************************************************** Elementos modificables *************************************************************/
+/* Propiedades del body */
+.body-container {
+    justify-content: center; /* Centra horizontalmente los elementos hijos */
+    align-items: center; /* Centra verticalmente los elementos hijos */
+}
+/* Panel cabezera */
+.panel-titu {
+    margin-top: 2%;
+    height: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Contenedor del texto */
+.panel-titu span {
+    display: flex;
+    user-select: none; /* No permite ser seleccionado */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+}
+/********************************************************************************************************************/
+/*------------------------------------ Clase de efectos para paneles (Dinamico) ------------------------------------*/
+.panel-eff {
+    position: relative;
+    border-radius: 30px;
+    transition: all .3s, filter 1s;
+}
+/* Primera capa de la clase efectos */
+.panel-eff::before{
+    content: '';
+    position: absolute;
+    width: calc(100%);
+    height: inherit;
+    border-radius: inherit;
+    background-color: rgba(255,255,255);
+    opacity: 0;
+    z-index: -2;
+    transition: all .3s, filter 1s, opacity .5s;
+}
+/* Segunda capa de la clase efectos */
+.panel-eff::after{
+    content: '';
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    transition: all .3s, filter 1s;
+}
+/* Efectos para la capas de la clase efecto */
+.panel-eff:hover::after {
+    filter: drop-shadow(0 0 10px var(--secodary-color));
+}
+.panel-eff:hover::before {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px var(--white-color));
+}
+/********************************************************************************************************************/
+
+/******** Auto resposive ************/
+@media (max-width: 991px) {/* Modifica elementos en un determinada resolucion sm*/
+    
+}

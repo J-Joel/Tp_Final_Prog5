@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+}
+.conte-img {
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+.conte-img img {
+    width: 500px;
+    height: 500px;
+}
