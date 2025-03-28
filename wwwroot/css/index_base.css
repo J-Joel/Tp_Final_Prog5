@@ -387,7 +387,7 @@ body {
     justify-content: center;
 }
 /* Contenedor del texto */
-.panel-titu span {
+.panel-titu div {
     display: flex;
     user-select: none; /* No permite ser seleccionado */
     align-items: center;
