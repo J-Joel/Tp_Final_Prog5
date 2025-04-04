@@ -12,11 +12,11 @@ namespace TP_Final_Programacion5.Controllers
             return "Hola esto es una cadena de texto(¿o un Json?), recuerde acceder a la otra accion mediante la url con ../welcome/[N°]?name=[Nombre] o ../welcome?name=[Nombre]&id=[N°]";
         }
         /*
-
         public IActionResult Index()
         {
             return Json(new { mensaje = "Hola esto es Json(¿o un diccionario?), recuerde acceder a la otra accion mediante la url con ../welcome/[N°]?name=[Nombre] o ../welcome?name=[Nombre]&id=[N°]" });
-        }*/
+        }
+        */
 
         // GET: /HelloWorld/Welcome/ 
         // Requires using System.Text.Encodings.Web;
