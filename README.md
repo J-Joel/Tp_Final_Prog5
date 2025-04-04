@@ -8,7 +8,7 @@
 
 Este proyecto es exclusivamente para las actividades de la materia de Programación 5. Se espera que se aprenda y aplique los siguientes temas:
 
-- NET 5
+- .NET 8
 - Entity Framework
 - MVC
 - ADO
