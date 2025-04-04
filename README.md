@@ -30,6 +30,6 @@ Se utilizará plantillas HTML Razor, para realizar páginas dinámicas junto a J
 - https://readme.so/es
 - https://www.screentogif.com
 
-### Guía de uso (En proceso...)
+### Guía de contenidos (En proceso...)
 
 - https://docs.google.com/document/d/1Zy-JBVSpX3lHvdiPWkvyp9zqkiiTVnxDOkr7ZKuzgkQ/edit?usp=sharing
