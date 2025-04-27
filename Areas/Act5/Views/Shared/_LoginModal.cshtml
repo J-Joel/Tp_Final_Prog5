@@ -1,0 +1,27 @@
+﻿@model TP_Final_Programacion5.Areas.Act5.Models.Usuario
+@{
+    Layout = null;
+}
+
+<h1>Iniciar sesion</h1>
+<form asp-controller="Usuario" asp-action="Login" method="post">
+    <div class="mb-3">
+        <label for="usuario" class="form-label">Nombre de Usuario</label>
+        <input type="text" class="form-control" id="usuario" name="usuario" required>
+    </div>
+    <div class="mb-3">
+        <label for="contraseña" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+    </div>
+    <input type="hidden" name="UrlActual" id="UrlActual" value="" />
+    <div>
+    <button type="submit">Ingresar</button>
+    </div>
+</form>
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}
+<p>
+    ¿No tienes cuenta? <a href="#" id="loginARegistro" data-form-url="@Url.Action("Registro", "Usuario")">Regístrate aquí</a>.
+</p>

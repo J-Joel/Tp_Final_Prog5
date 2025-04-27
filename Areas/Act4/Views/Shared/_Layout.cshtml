@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Movie App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/Act4/base_Menu.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Act4/base_Body.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Act4/base_Footer.css" asp-append-version="true" />
+    @RenderSection("CSS", required: false)
+</head>
+<body>
+    <nav class="menu-container m-auto" id="menu">
+        <div class="navmenu">
+            <input type="checkbox" id="central" hidden>
+            <label for="central" class="central">
+                <i class="open ri-menu-line ri-2x"></i>
+                <i class="close ri-close-line ri-2x"></i>
+            </label>
+            <ul class="menu">
+                <li><a asp-area="Act4" asp-controller="Home" asp-action="Peliculas" class="nav-link"><div><span>Peliculas</span><i class="ri-netflix-line ri-2x"></i></div></a></li>
+                <li><a asp-area="Act4" asp-controller="Home" asp-action="Privacidad" class="nav-link"><div><span>Privacidad</span><i class="ri-key-line ri-2x"></i></div></a></li>
+            </ul>
+            <ul class="submenu">
+                <li><a asp-area="" asp-controller="Home" asp-action=""><span>Salir</span><div><i class="ri-close-circle-line"></i></div></a></li>
+                <li><a asp-area="Act4" asp-controller="Home" asp-action=""><span>Inicio</span><div><i class="ri-home-line"></i></div></a></li>
+                <li><a href="#"><span>Perfil</span><div><i class="ri-user-line"></i></div></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="body-container">
+        <header class="panel-titu"><span class="nav-link panel-eff"><h1>@ViewData["Title"]</h1></span></header>
+        <aside class="panel-izq panel-eff">
+            @RenderSection("PI", required: false)
+        </aside>
+        <div class="panel-body panel-eff">
+            @RenderBody()
+        </div>
+        <aside class="panel-der panel-eff">
+            @RenderSection("PD", required: false)
+        </aside>
+    </section>
+
+    <footer class="panel-footer">
+        <div class="">
+            <a asp-area="Act4" asp-controller="Home" asp-action="">Inicio</a>
+            <a asp-area="Act4" asp-controller="Home" asp-action="Peliculas">Peliculas</a>
+            <a asp-area="Act4" asp-controller="Home" asp-action="Privacidad">Privacidad</a>
+        </div>
+        <div>
+            |10/04/25|
+        </div>
+        <div class="separador"></div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
