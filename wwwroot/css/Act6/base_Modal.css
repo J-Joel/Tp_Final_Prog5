@@ -1,0 +1,79 @@
+.modalPrincipal {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    z-index: 1050; /* Z-index alto para estar sobre la mayoría de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(0px);
+    /* display: flex; /* Se ajusta desde el script */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    transition: opacity .3s ease-in-out, backdrop-filter .3s;
+}
+.modalPrincipal:has(.contentModal:hover){
+    backdrop-filter:blur(15px);
+}
+.modalPrincipal.show {
+    display: flex;
+    opacity: 1;
+}
+.contentModal {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    /* align-items: start;*/
+    justify-content: center;
+    text-align: center;
+    row-gap: 5px;
+    column-gap: 5px;
+    border-radius: 30px;
+    /* Tamaño del contenido */
+    width: 95%; /* Ancho en pantallas pequeñas */
+    max-width: 600px; /* Ancho máximo en pantallas grandes */
+    /* Asegura que el contenido no se desborde */
+    overflow-y: auto; /* Permite scroll dentro del contenido si es necesario */
+    max-height: 90vh; /* Altura máxima para que quepa en la mayoría de las pantallas */
+    transition: all .3s, filter 1s;
+}
+.contentModal::before {
+    content: '';
+    top:2px;
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.4);
+    z-index: -2;
+    transition: all .3s, filter 1s;
+}
+.contentModal:hover {
+    background-color: rgba(255,255,255);
+    filter: drop-shadow(0 0 10px var(--secodary-color));
+}
+.contentModal:hover .modalPrincipal {
+    backdrop-filter: blur(0px);
+}
+.contentModal:hover::before {
+    background-color: rgba(0,0,0,0.8);
+    filter: drop-shadow(0 0 5px var(--white-color));
+}
+.cierreModal {
+    color: #aaa; /* Color gris suave */
+    /* Posicionamiento absoluto respecto a .modal-content */
+    position: absolute;
+    top: 5px; /* Distancia desde arriba del modal-content */
+    right: 15px; /* Distancia desde la derecha del modal-content */
+    font-size: 25px; /* Tamaño grande */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: color 0.3s ease; /* Animación suave al pasar el ratón */
+}
+.cierreModal:hover,
+.cierreModal:focus {
+    color: rgba(255,255,255); /* Color más oscuro al pasar el ratón */
+    text-decoration: none; /* Elimina subrayado */
+}

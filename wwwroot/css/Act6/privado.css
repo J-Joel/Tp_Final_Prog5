@@ -1,0 +1,27 @@
+.conte-img { /* Contenedor de la imagen */
+    position: relative;
+    width: 500px; /* Ancho */
+    height: 500px; /* Alto */
+}
+/* Pseudo-elemento, se podria decir que es una capa de diseño de un elemento, por defecto aparece detras del elemento */
+.conte-img::before { 
+    content:''; /* Para que un Pseudo-elemento sea visible, tiene que tener un contenido de texto o '' */
+    position:absolute;
+    width:calc(100%); /* Calcula y toma el tamaño original(100%) del elemento padre */
+    height:calc(100%);
+    background-color:black; /* Fondo de color */
+    border-radius: 20px; /* Radio de los bordes, pueden ser pixeles(px) o porcentajes(%) */
+    transition: background-color .3s, filter .7s; /* Define un tiempo de transiccion de las propiedades, al ser cambiadas (Crea efectos/animaciones) */
+    z-index:-1; /* Indica la posicion que tomara en el espacio Z (Un mayor numero indicara que siempre se vera ante otros elementos en su misma posicion X,Y) */
+}
+/* :hover es una accion CSS, que es iniciado al pasar el mouse sobre el elemento previamente indicado */
+.conte-img:hover::before { /* Este hover espera a que el elemento padre realice la accion, si es asi, el Pseudo-elemento ::before se sobrecargara, mientras la accion este activa */
+    background-color:white; /* black -> white */
+    filter: drop-shadow(0 0 5px white); /* Se le añade un filtro de "sombra" */
+}
+.conte-img img { /* Los elementos img, que sean hijos de la clase */
+    border-radius: 20px;
+    height:100%;
+    width:100%;
+    padding: 5px; /* Espacio entre imagen y borde */
+}

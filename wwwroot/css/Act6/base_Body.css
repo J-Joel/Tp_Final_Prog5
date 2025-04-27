@@ -1,0 +1,206 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
+:root {
+    --primary-color: #ff4757;
+    --secodary-color: #000000;
+    --white-color: #ffffff;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    color: inherit !important;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 400;
+    color: var(--white-color) !important;
+    background-image: linear-gradient(to right, rgb(40, 40, 40), rgb(220, 220, 220), rgb(40, 40, 40) );
+}
+/***************************************************** Cuerpo de las vistas *************************************************************/
+/* Propiedades del body */
+.body-container {
+    margin: 5% 2% 2% 2%;
+    display: flex;
+    flex-wrap: wrap; /* Ordena los elementos segun sus propiedades */
+    row-gap: 20px;
+    column-gap: 30px;
+    /* flex-direction: row; /* Especifica la forma de ordenar los elementos */
+    height: 100%;
+}
+/********************************************************************************************************************/
+/* Panel cabezera */
+.panel-titu {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Contenedor del texto */
+.panel-titu span {
+    display: flex;
+    user-select: none; /* No permite ser seleccionado */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+}
+/********************************************************************************************************************/
+/* Paneles laterales */
+.panel-izq, .panel-der {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+}
+.panels-conte {
+    position:relative;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+/********************************************************************************************************************/
+/* Contenedor Principal */
+.panel-body {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    /* align-items: start;*/
+    justify-content: center;
+    text-align: center;
+    row-gap: 5px;
+    column-gap: 5px;
+}
+.conte-Text {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 5% 5% 5% 5%;
+}
+/********************************************************************************************************************/
+/*------------------------------------ Clase de efectos para paneles (Dinamico) ------------------------------------*/
+.panel-eff {
+    position: relative;
+    border-radius: 30px;
+    transition: all .3s, filter 1s;
+}
+/* Primera capa de la clase efectos */
+.panel-eff::before{
+    content: '';
+    position: absolute;
+    width: calc(100%);
+    height: inherit;
+    border-radius: inherit;
+    background-color: rgba(255,255,255);
+    opacity: 0;
+    z-index: -3;
+    transition: all .3s, filter 1s, opacity .5s;
+}
+/* Segunda capa de la clase efectos */
+.panel-eff::after{
+    content: '';
+    top:2px;
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -2;
+    transition: all .3s, filter 1s;
+}
+/* Efectos para la capas de la clase efecto */
+.panel-eff:hover::after {
+    filter: drop-shadow(0 0 10px var(--secodary-color));
+}
+.panel-eff:hover::before {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px var(--white-color));
+}
+/********************************************************************************************************************/
+/******** Auto resposive ************/
+@media (max-width: 991px) { /* Modifica elementos en una determinada resolucion sm*/
+    /* Contenedor del cuerpo */
+    .body-container {
+        flex-direction: column;
+    }
+    /***************************************/
+    /* Cabeza de la pagina */
+    .panel-titu span {
+        width: 80%;
+    }
+    /***************************************/
+    /* Paneles laterales */
+    .panel-izq, .panel-der {
+        width: 100%;
+    }
+    /***************************************/
+    .panel-body {
+        width: 100%;
+    }
+    /***************************************/
+    /* footer */
+    .panel-footer::after {
+        width: calc(90%);
+        height: 2px;
+    }
+    /* Contenedores del footer */
+    .panel-footer > div {
+        width: 90%;
+    }
+    /***************************************/
+    /* Separador del footer */
+    .panel-footer .separador {
+        width: calc(90%);
+        height: 2px;
+    }
+
+        .panel-footer .separador::after {
+            width: calc(100% + 1px);
+            height: calc(100% + 2px);
+            background-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.7),rgba(255,255,255,0.5));
+        }
+
+    .panel-footer > div:nth-child(1):hover ~ .separador::after,
+    .panel-footer > div:nth-child(2):hover ~ .separador::after {
+        width: calc(100% + 11%);
+        height: calc(100% + 15px);
+        transform-origin: left top right;
+        border-radius: 10px 10px 0 0;
+        transform: scaleY(1.5);
+        background-image: linear-gradient(to top, transparent 20%, rgba(0,0,0,0.7),rgba(255,255,255,0.9));
+        filter: drop-shadow(0 -5px 25px rgba(255,255,255,0.5));
+        box-shadow: 0 -16px 25px rgba(255,255,255,0.9); /* Brillo hacia la izquierda */
+    }
+
+    .panel-footer > div:nth-child(2):hover ~ .separador::after {
+        transform: scaleY(-1.5);
+    }
+    /***************************************/
+}

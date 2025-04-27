@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TP_Final_Programacion5.BaseDeDatoLocal.Act5;
+using TP_Final_Programacion5.BaseDeDatoLocal.Act6;
 
-namespace TP_Final_Programacion5.Areas.Act5.Controllers
+namespace TP_Final_Programacion5.Areas.Act6.Controllers
 {
-    [Area("Act5")]
+    [Area("Act6")]
     public class UsuarioController : Controller
     {
-        [Authorize(AuthenticationSchemes = "AreaAct5Cookies")]
+        [Authorize(AuthenticationSchemes = "AreaAct6Cookies")]
         public IActionResult Index()
         {
             return View();
@@ -30,10 +30,10 @@ namespace TP_Final_Programacion5.Areas.Act5.Controllers
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.User),
                 };
-                var claimsIdentity = new ClaimsIdentity(claims, "AreaAct5Cookies"); // Tiene que tener el mismo nombre que en el program
+                var claimsIdentity = new ClaimsIdentity(claims, "AreaAct6Cookies"); // Tiene que tener el mismo nombre que en el program
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 // Propiedades de autenticación
-                HttpContext.SignInAsync("AreaAct5Cookies", claimsPrincipal);
+                HttpContext.SignInAsync("AreaAct6Cookies", claimsPrincipal);
                 HttpContext.User = new ClaimsPrincipal(claimsIdentity);
                 return Json(new { success = true, redirect = Url.Action("Index", "Home") });
             }
@@ -72,7 +72,7 @@ namespace TP_Final_Programacion5.Areas.Act5.Controllers
         }
         public IActionResult Logout()
         {
-            HttpContext.SignOutAsync("AreaAct5Cookies");
+            HttpContext.SignOutAsync("AreaAct6Cookies");
             return RedirectToAction("Index", "Home");
         }
     }
