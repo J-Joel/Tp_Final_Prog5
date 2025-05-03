@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TP_Final_Programacion5.BaseDeDatoLocal.Act5;
 
 namespace TP_Final_Programacion5.Areas.Act5.Controllers
 {
@@ -7,7 +8,7 @@ namespace TP_Final_Programacion5.Areas.Act5.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(TablaUsuarios.Usuarios);
         }
         public IActionResult Welcome(string name, int numTimes = 1)
         {

@@ -1,7 +1,15 @@
-﻿@{
+﻿@using TP_Final_Programacion5.Areas.Act5.Models
+@model IEnumerable<Usuario>
+@{
 	ViewData["Title"] = "Inicio";
 }
-
+@section PI {
+	<h5>Usuarios</h5>
+	@foreach (var usuario in Model)
+	{
+		<div>@Html.DisplayFor(modelItem => usuario.User)</div>
+	}
+}
 <div class="conte-Text">
 	<p>Recuerde que puede acceder a la pantalla de bienvenida mediante la URL con 
 		".../Welcome?name=[Valor de parametro]&numtimes=[Valor de parametro]"

@@ -32,7 +32,7 @@ namespace TP_Final_Programacion5.Areas.Act5.Controllers
 
             return View(listMovies);
         }
-        public async Task<IActionResult> Detalles(int? id)
+        public IActionResult Detalles(int? id)
         {
             if (id == null) // Si no se ingresa una id de peliculas
             {

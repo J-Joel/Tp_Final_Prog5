@@ -16,15 +16,14 @@ builder.Services.AddAuthentication()
         options.AccessDeniedPath = "/Act5/Usuario/Login"; // La ruta a tu página de acceso denegado
         options.Cookie.Path = "/Act5"; // Especifica la ruta para la cookie de AreaAct5
         options.ExpireTimeSpan = TimeSpan.FromMinutes(2); // Tiempo de expiración de la cookie de autenticación
-        // Otras opciones de configuración de la cookie
 
         // Si quieres que se renueve con cada request activa
         options.SlidingExpiration = true;
     })
     .AddCookie("AreaAct6Cookies", options =>
     {
-        options.Cookie.Name = "AreaAct6Cookies"; // Nombre diferente
-        options.Cookie.Path = "/Act6"; // Scope diferente
+        options.Cookie.Name = "AreaAct6Cookies";
+        options.Cookie.Path = "/Act6";
         options.LoginPath = "/Act6/Usuario/Login";
         options.AccessDeniedPath = "/Act6/Usuario/Login";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(2);

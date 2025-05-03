@@ -7,7 +7,18 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5179"
+      "applicationUrl": "http://localhost:5001"
+    },
+    // Habilita el HTTPS
+    // Se tiene que instalar los certificados de desarrollo local mediante el uso del CMD: dotnet dev-certs https --trust
+    "https": { // Y tener configurado este perfil
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:5002;http://localhost:5001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -33,7 +44,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:7484",
-      "sslPort": 0
+      "sslPort": 44320
     }
   }
 }

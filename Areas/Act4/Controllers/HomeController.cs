@@ -43,7 +43,7 @@ namespace TP_Final_Programacion5.Areas.Act4.Controllers
             return View(listMovies);
         }
         // GET: Movies/Detalles/5
-        public async Task<IActionResult> Detalles(int? id)
+        public IActionResult Detalles(int? id)
         {
             if (id == null) // Si no se ingresa una id de peliculas
             {
