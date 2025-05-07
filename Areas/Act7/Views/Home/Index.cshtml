@@ -1,0 +1,17 @@
+﻿@using TP_Final_Programacion5.Areas.Act7.Models
+@model IEnumerable<Usuario>
+@{
+	ViewData["Title"] = "Inicio";
+}
+@section PI{
+	<h5>Usuarios</h5>
+	@foreach (var usuario in Model)
+	{
+		<div>@Html.DisplayFor(modelItem => usuario.User)</div>
+	}
+}
+<div class="conte-Text">
+	<p>Recuerde que puede acceder a la pantalla de bienvenida mediante la URL con 
+		".../home/Welcome?numtimes=[Valor numerico]" nuntimes es opcional
+	</p>
+</div>

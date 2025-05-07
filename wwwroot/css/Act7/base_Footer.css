@@ -1,0 +1,123 @@
+﻿/* Footer */
+.panel-footer {
+    width: 100%;
+    height: 20%;
+    min-height: 50vh;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all .3s ease;
+    z-index: 1;
+}
+/* Efecto sobre al pasar sobre el footer */
+.panel-footer:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+/********************************************************************************************************************/
+/* Contenedores div del footer */
+.panel-footer > div { /* El > indica estrictamente que afecte a los elementos hijos del primer elemento(Sin eso puede afectar a todos los elementos dentro del elemento contenedor) */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+    width: 45%;
+    z-index: 2;
+}
+/********************************************************************************************************************/
+/* Separador del footer */
+.panel-footer .separador {
+    position: absolute;
+    margin: 0;
+    width: 2px;
+    height: calc(80%);
+    background: rgba(0,0,0);
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: -1;
+}
+/* Segunda capa del separador */
+.panel-footer .separador::after {
+    content: '';
+    position: absolute;
+    margin: 0;
+    width: calc(100% + 2px);
+    height: calc(100% + 1px);
+    opacity: 0;
+    background-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,0.7),rgba(255,255,255,0.5));
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px #fff;
+    z-index: -1;
+    transition: background-color .3s, opacity .3s, filter .3s, box-shadow .3s, width .5s, height .7s, border-radius .3s, transform .5s, transform-origin .3s;
+}
+/* Si el mouse esta dentro del footer contenedor */
+.panel-footer:hover .separador,
+.panel-footer:hover .separador::after {
+    opacity: 1;
+}
+/* Si el mouse esta dentro de los contenedores div hijos especificos del footer contenedor */
+/* Efecto de seguimiento segun el contenedor */
+.panel-footer > div:nth-child(1):hover ~ .separador::after,
+.panel-footer > div:nth-child(2):hover ~ .separador::after {
+    width: calc(100% + 15px);
+    height: calc(100% + 25%);
+    transform-origin: left top bottom;
+    border-radius: 10px 0 0 10px;
+    transform: scaleX(1.5);
+    background-image: linear-gradient(to left, transparent 20%, rgba(0,0,0,0.7),rgba(255,255,255,0.9));
+    filter: drop-shadow(-5px 0 25px rgba(255,255,255,0.5));
+    box-shadow: -16px 0 25px rgba(255,255,255,0.9);  /* Brillo hacia la izquierda */
+}
+/* Efecto invertido para el segundo contenedor */
+.panel-footer > div:nth-child(2):hover ~ .separador::after {
+    transform: scaleX(-1.5);
+}
+/********************************************************************************************************************/
+/******** Auto resposive ************/
+@media (max-width: 991px) { /* Modifica elementos en una determinada resolucion sm*/
+    /* footer */
+    .panel-footer::after {
+        width: calc(90%);
+        height: 2px;
+    }
+    /* Contenedores del footer */
+    .panel-footer > div {
+        width: 90%;
+    }
+    /***************************************/
+    /* Separador del footer */
+    .panel-footer .separador {
+        width: calc(90%);
+        top: calc(55%);
+        height: 2px;
+    }
+
+    .panel-footer .separador::after {
+        width: calc(100% + 1px);
+        height: calc(100% + 2px);
+        background-image: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.7),rgba(255,255,255,0.5));
+    }
+
+    .panel-footer > div:nth-child(1):hover ~ .separador::after,
+    .panel-footer > div:nth-child(2):hover ~ .separador::after {
+        width: calc(100% + 11%);
+        height: calc(100% + 15px);
+        transform-origin: left top right;
+        border-radius: 10px 10px 0 0;
+        transform: scaleY(1.5);
+        background-image: linear-gradient(to top, transparent 20%, rgba(0,0,0,0.7),rgba(255,255,255,0.9));
+        filter: drop-shadow(0 -5px 25px rgba(255,255,255,0.5));
+        box-shadow: 0 -16px 25px rgba(255,255,255,0.9); /* Brillo hacia la izquierda */
+    }
+
+    .panel-footer > div:nth-child(2):hover ~ .separador::after {
+        transform: scaleY(-1.5);
+    }
+}

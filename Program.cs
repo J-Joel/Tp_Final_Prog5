@@ -29,6 +29,16 @@ builder.Services.AddAuthentication()
         options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
 
         options.SlidingExpiration = true;
+    })
+    .AddCookie("AreaAct7Cookies", options =>
+    {
+        options.Cookie.Name = "AreaAct7Cookies";
+        options.Cookie.Path = "/Act7";
+        options.LoginPath = "/Act7/Usuario/Login";
+        options.AccessDeniedPath = "/Act7/Usuario/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+
+        options.SlidingExpiration = true;
     });
 
 builder.Services.AddAuthorization(); // Agrega el servicio de autorización
@@ -54,6 +64,11 @@ app.UseAuthorization();
 
 // Aqui iran las 16 Areas a crear
 #region Areas
+app.MapAreaControllerRoute(
+    name: "Act7Area",
+    areaName: "Act7",
+    pattern: "Act7/{controller=Home}/{action=Index}/{id?}"
+);
 app.MapAreaControllerRoute(
     name: "Act6Area",
     areaName: "Act6",

@@ -7,7 +7,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5001"
+      "applicationUrl": "http://localhost:5000"
     },
     // Habilita el HTTPS
     // Se tiene que instalar los certificados de desarrollo local mediante el uso del CMD: dotnet dev-certs https --trust

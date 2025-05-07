@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@inject IAuthenticationService AuthService
+@{
+    // Autenticación para el area
+    var areaSituado = ViewContext.RouteData.Values["area"] as string; // Obtengo el el area en que se encuentra el html
+    var authResult = await AuthService.AuthenticateAsync(Context, $"Area{areaSituado}Cookies");
+    var isAuthenticated = authResult?.Principal?.Identity?.IsAuthenticated ?? false;
+    var username = isAuthenticated ? authResult?.Principal?.FindFirst(ClaimTypes.Name)?.Value : null;
+    ViewData["Title"] = "Bienvenido";
+}
+<div class="conte-Text">
+    <ul style="padding:0px;">
+        @if (isAuthenticated)
+        {
+            @for (int i = 0; i < (int)ViewData["NumTimes"]!; i++)
+            {
+                <li>¡Hola @(username)!</li>
+            }
+        }
+        else
+        {
+            <li>Porfavor inicie sesion</li>
+        }
+    </ul>
+</div>
+

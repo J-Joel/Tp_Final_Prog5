@@ -1,0 +1,96 @@
+﻿@using TP_Final_Programacion5.Areas.Act7.Controllers
+@using TP_Final_Programacion5.Areas.Act7.Models
+
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@inject IAuthenticationService AuthService
+
+@model IEnumerable<Movie>
+@{
+    // Autenticación para el area
+    var areaSituado = ViewContext.RouteData.Values["area"] as string; // Obtengo el el area en que se encuentra el html
+    var authResult = await AuthService.AuthenticateAsync(Context, $"Area{areaSituado}Cookies");
+    var isAuthenticated = authResult?.Principal?.Identity?.IsAuthenticated ?? false;
+    var username = isAuthenticated ? authResult?.Principal?.FindFirst(ClaimTypes.Name)?.Value : null;
+    ViewData["Title"] = "Lista de peliculas";
+}
+@section CSS {
+<!-- CSS específico de esta vista -->
+<link rel="stylesheet" href="~/css/Act6/peli_index.css" />
+}
+<div class="conte-Text">
+    <p>¡Hola, de momento los datos son cargados de un listado estatico!</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPublicada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="filapeli">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaPublicada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Precio)
+                    </td>
+                    <td hidden>
+                        <input type="radio" name="selectedUser" value="@item.Id"/>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section PD{
+    @if (isAuthenticated && username == "admin")
+    {
+        <div style="width:100%;height:100%;">
+            <input type="radio" id="actionActivo" hidden />
+            <ul class="panels-conte">
+                <li>
+                    <a href="#">Añadir</a>
+                </li>
+                <li id="conteAction" class="conteAction">
+                    <ul class="panels-conte">
+                        <li>
+                            <a id="btnEditar" href="#">Editar</a>
+                        </li>
+                        <li>
+                            <a id="btnDetalle" href="#">Detalle</a>
+                        </li>
+                        <li>
+                            <a id="btnEliminar" href="#">Borrar</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    }
+}
+@section Scripts {
+    <script>
+        window.AppConfig = window.AppConfig || {}; // Crea un objeto que almacena datos globales, es usado para almacenar codigo razor y utilizado en scripts importado
+        window.AppConfig.detailPageUrl = '@Url.Action("Detalles", "Peliculas", new { area = "Act7" })';
+    </script>
+    <script src="~/js/Act7/peli_index.js" asp-append-version="true"></script>
+}
