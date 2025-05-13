@@ -1,0 +1,43 @@
+﻿@using TP_Final_Programacion5.Areas.Act8.Controllers
+@using TP_Final_Programacion5.Areas.Act8.Models
+@model Movie
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div class="conte-Text">
+    <h4>Pelicula</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaPublicada)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaPublicada)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Genero)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Genero)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Precio)
+        </dd>
+    </dl>
+</div>
+
+@section PD{
+    <a href="#">Editar</a> |
+    <a asp-area="Act8" asp-controller="Peliculas" asp-action="">Volver a la lista</a>
+}

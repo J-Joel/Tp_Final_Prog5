@@ -1,5 +1,5 @@
-﻿@using TP_Final_Programacion5.Areas.Act7.Controllers
-@using TP_Final_Programacion5.Areas.Act7.Models
+﻿@using TP_Final_Programacion5.Areas.Act8.Controllers
+@using TP_Final_Programacion5.Areas.Act8.Models
 
 @using Microsoft.AspNetCore.Authentication
 @using System.Security.Claims
@@ -16,7 +16,7 @@
 }
 @section CSS {
 <!-- CSS específico de esta vista -->
-<link rel="stylesheet" href="~/css/Act7/peli_index.css" />
+<link rel="stylesheet" href="~/css/Act8/peli_index.css" />
 }
 <div class="conte-Text">
     <p>¡Hola, de momento los datos son cargados de un listado estatico!</p>
@@ -62,13 +62,11 @@
     </table>
 </div>
 @section PD{
-    @if (isAuthenticated && username == "admin")
-    {
         <div style="width:100%;height:100%;">
             <input type="radio" id="actionActivo" hidden />
             <ul class="panels-conte">
                 <li>
-                    <a href="#">Añadir</a>
+                    <a asp-area="Act8" asp-controller="Peliculas" asp-action="Añadir">Añadir</a>
                 </li>
                 <li id="conteAction" class="conteAction">
                     <ul class="panels-conte">
@@ -85,12 +83,14 @@
                 </li>
             </ul>
         </div>
-    }
+
 }
 @section Scripts {
     <script>
         window.AppConfig = window.AppConfig || {}; // Crea un objeto que almacena datos globales, es usado para almacenar codigo razor y utilizado en scripts importado
-        window.AppConfig.detailPageUrl = '@Url.Action("Detalles", "Peliculas", new { area = "Act7" })';
+        window.AppConfig.detailPageUrl = '@Url.Action("Detalles", "Peliculas", new { area = "Act8" })';
+        window.AppConfig.editPageUrl = '@Url.Action("Modificar", "Peliculas", new { area = "Act8" })';
+        window.AppConfig.deletePageUrl = '@Url.Action("Eliminar", "Peliculas", new { area = "Act8" })';
     </script>
-    <script src="~/js/Act7/peli_index.js" asp-append-version="true"></script>
+    <script src="~/js/Act8/peli_index.js" asp-append-version="true"></script>
 }

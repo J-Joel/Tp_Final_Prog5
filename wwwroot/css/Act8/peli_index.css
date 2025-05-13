@@ -2,10 +2,9 @@
     background-color: none;
     transition: background-color .3s;
 }
-
-    .filapeli:hover {
-        background-color: rgba(0,0,0,0.4);
-    }
+.filapeli:hover {
+    background-color: rgba(0,0,0,0.4);
+}
 
 .conteAction {
     display: none;
@@ -28,7 +27,9 @@
     overflow: hidden;
     transition: all .3s;
 }
-
+.panels-conte{
+    padding: 0px;
+}
 .panels-conte li a {
     position: relative;
     display: flex;
