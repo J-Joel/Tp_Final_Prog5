@@ -8,7 +8,7 @@ namespace TP_Final_Programacion5.Areas.Act9.Models
     public class Usuario
     {
         /// Atributos
-        private string id;
+        private string id = "";
         private string user = "";
         private string contraseña = "";
 
