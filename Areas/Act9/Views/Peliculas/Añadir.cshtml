@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Nueva Pelicula";
+    string[] listaGeneros = { "Acción", "Comedia", "Drama", "Ciencia", "Terror", "Thriller", "Musical", "Romance", "Documental", "Fantasía", "Western" };
+}
+@section CSS {
+    <link rel="stylesheet" href="~/css/Act9/formElement.css" asp-append-version="true" />
+}
+<div class="conte-Text">
+    <p>Complete los campos para añadir la nueva pelicula</p>
+    <form asp-controller="Peliculas" asp-action="Añadir" method="post" class="form-Conter">
+        <div class="form-Element">
+            <label for="titulo" class="form-label">Titulo</label>
+            <input type="text" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-Element">
+            <label for="fePubli" class="form-label">Fecha de publicación</label>
+            <input type="date" id="fePubli" name="fePubli" required />
+        </div>
+        <div class="form-Element">
+            <label for="genero" class="form-label">Contraseña</label>
+            <select id="genero" name="genero">
+                @foreach (var gen in listaGeneros)
+                {
+                    <option value="@gen">@gen</option>
+                }
+            </select>
+        </div>
+        <div class="form-Element">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" id="precio" name="precio" required />
+        </div>
+        <div>
+            <button type="submit">Registrar nueva Pelicula</button>
+        </div>
+    </form>
+</div>

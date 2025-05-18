@@ -1,0 +1,79 @@
+.conte-notif {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+    width: 400px;
+    height: 150px;
+    background-color: gray;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px; /* El padin permite crear margenes dentro de su contenido, a diferencia del margin */
+    transition: all .3s;
+    z-index: 1;
+}
+.conte-notif.show {
+    display: flex;
+    opacity: 1;
+}
+.cierre-notif {
+    color: #aaa;
+    position: absolute;
+    top: -5px;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.cierre-notif:hover,
+.cierre-notif:focus {
+    color: rgba(255,255,255);
+    text-decoration: none;
+}
+.conte-notif .noti-Adver,
+.conte-notif .noti-Error,
+.conte-notif .noti-Valido {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.conte-notif h4 {
+    height: 20%;
+    margin: 0;
+}
+.conte-notif p {
+    word-break: break-all;
+    margin: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80%;
+}
+
+.conte-notif .noti-Valido h4{
+    color: green;
+}
+.conte-notif .noti-Adver h4 {
+    color: yellow;
+}
+.conte-notif .noti-Error h4 {
+    color: red;
+}
+
+/* Modifica elementos en una determinada resolucion sm*/
+@media (max-width: 991px) {
+    .conte-notif {
+        width: 100%;
+        height: 100px;
+        bottom: 0px;
+        left: 0px;
+        border-radius: 0px;
+    }
+}

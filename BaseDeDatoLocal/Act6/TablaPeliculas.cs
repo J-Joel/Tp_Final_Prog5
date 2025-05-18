@@ -4,8 +4,8 @@ namespace TP_Final_Programacion5.BaseDeDatoLocal.Act6
 {
     static class TablaPeliculas
     {
-        static public List<Movie> peliculas = new List<Movie>
-        {
+        static public List<Movie> peliculas =
+        [
             new Movie
             {
                 Id = 0,
@@ -23,7 +23,7 @@ namespace TP_Final_Programacion5.BaseDeDatoLocal.Act6
                 Genero = "Terror",
                 Precio = 50
             },
-        };
+        ];
         static private int moviesTotales = 2;
         static public List<Movie> Peliculas { get => peliculas; set => peliculas = value; }
         static public int PeliculasTotales { get => moviesTotales; set => moviesTotales = value; }
@@ -42,7 +42,7 @@ namespace TP_Final_Programacion5.BaseDeDatoLocal.Act6
                 Peliculas.Add(nuevaPelicula);
                 moviesTotales = moviesTotales + 1;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

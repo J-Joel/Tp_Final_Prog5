@@ -1,0 +1,45 @@
+﻿@using TP_Final_Programacion5.Areas.Act9.Models
+@{
+    ViewData["Title"] = $"Modificando: {Model.Titulo}";
+    string[] listaGeneros = { "Acción", "Comedia", "Drama", "Ciencia", "Terror", "Thriller", "Musical", "Romance", "Documental", "Fantasía", "Western" };
+}
+@section CSS {
+    <link rel="stylesheet" href="~/css/Act9/formElement.css" asp-append-version="true" />
+}
+<div class="conte-Text">
+    <p>Asegúrese de completar todos los campos correctamente</p>
+    <form asp-controller="Peliculas" asp-action="Modificar" method="post" class="form-Conter">
+        <div class="form-Element">
+            <label for="titulo" class="form-label">Titulo</label>
+            <input type="text" id="titulo" name="titulo" value="@Model.Titulo" required>
+        </div>
+        <div class="form-Element">
+            <label for="fePubli" class="form-label">Fecha de publicación</label>
+            <input type="date" id="fePubli" name="fePubli" value="@Model.FechaPublicada.ToString("yyyy-MM-dd")" required />
+        </div>
+        <div class="form-Element">
+            <label for="genero" class="form-label">Contraseña</label>
+            <select id="genero" name="genero">
+                @foreach (var gen in listaGeneros)
+                {
+                    <option value="@gen">@gen</option>
+                }
+            </select>
+        </div>
+        <div class="form-Element">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" id="precio" name="precio" value="@Model.Precio" required />
+        </div>
+        <div>
+            <button type="submit">Modificar pelicula</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var valorSeleccionado = '@Model.Genero';
+            $('#genero').val(valorSeleccionado);
+        });
+    </script>
+}

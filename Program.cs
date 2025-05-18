@@ -1,3 +1,23 @@
+try
+{
+    // Asegúrate de tener el paquete DotNetEnv instalado: Install-Package DotNetEnv
+    // Asegúrate de que tu archivo .env está en la raíz del proyecto y .gitignore
+    DotNetEnv.Env.Load();
+    Console.WriteLine(".env file loaded successfully (for local development).");
+}
+
+catch (FileNotFoundException)
+{
+    Console.WriteLine(".env file not found. Skipping loading (This is expected in production or without local .env).");
+}
+
+catch (Exception ex)
+{
+    Console.Error.WriteLine($"Error loading .env file: {ex.Message}");
+    // Decidir si este error debe detener el arranque
+    throw;
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDistributedMemoryCache();
@@ -49,7 +69,18 @@ builder.Services.AddAuthentication()
         options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
 
         options.SlidingExpiration = true;
+    })
+    .AddCookie("AreaAct9Cookies", options =>
+    {
+        options.Cookie.Name = "AreaAct9Cookies";
+        options.Cookie.Path = "/Act9";
+        options.LoginPath = "/Act9/Usuario/Login";
+        options.AccessDeniedPath = "/Act9/Usuario/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+
+        options.SlidingExpiration = true;
     });
+
 
 builder.Services.AddAuthorization(); // Agrega el servicio de autorización
 builder.Services.AddHttpContextAccessor(); // "Facilita" el acceso a los datos de la cookies
@@ -74,6 +105,12 @@ app.UseAuthorization();
 
 // Aqui iran las 16 Areas a crear
 #region Areas
+app.MapAreaControllerRoute(
+    name: "Act9Area",
+    areaName: "Act9",
+    pattern: "Act9/{controller=Home}/{action=Index}/{id?}"
+);
+
 app.MapAreaControllerRoute(
     name: "Act8Area",
     areaName: "Act8",

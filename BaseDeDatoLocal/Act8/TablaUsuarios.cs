@@ -36,7 +36,7 @@ namespace TP_Final_Programacion5.BaseDeDatoLocal.Act8
                 Usuarios.Add(nuevoUsuario);
                 usuariostotal = usuariostotal + 1;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

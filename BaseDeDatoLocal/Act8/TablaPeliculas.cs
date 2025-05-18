@@ -42,7 +42,7 @@ namespace TP_Final_Programacion5.BaseDeDatoLocal.Act8
                 Peliculas.Add(nuevaPelicula);
                 moviesTotales = moviesTotales + 1;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

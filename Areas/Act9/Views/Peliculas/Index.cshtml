@@ -1,0 +1,143 @@
+﻿@using TP_Final_Programacion5.Areas.Act9.Controllers
+@using TP_Final_Programacion5.Areas.Act9.Models
+
+@using Microsoft.AspNetCore.Authentication
+@using System.Security.Claims
+@inject IAuthenticationService AuthService
+
+@model IEnumerable<Movie>
+@{
+    // Autenticación para el area
+    var areaSituado = ViewContext.RouteData.Values["area"] as string; // Obtengo el el area en que se encuentra el html
+    var authResult = await AuthService.AuthenticateAsync(Context, $"Area{areaSituado}Cookies");
+    var isAuthenticated = authResult?.Principal?.Identity?.IsAuthenticated ?? false;
+    var username = isAuthenticated ? authResult?.Principal?.FindFirst(ClaimTypes.Name)?.Value : null;
+    ViewData["Title"] = "Lista de peliculas";
+}
+
+@section CSS {
+<!-- CSS específico de esta vista -->
+<link rel="stylesheet" href="~/css/Act9/peli_index.css" />
+}
+
+<div class="conte-Text">
+    @if (Model != null && Model.Any())
+    {
+        <p>¡Hola, para poder acceder al panel de películas, tiene que ser un administrador!</p>
+    }
+    else
+    {
+        <p>¡¡¡Todavía no se cargaron películas!!!</p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPublicada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr class="filapeli">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaPublicada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Precio)
+                        </td>
+                        <td hidden>
+                            <input type="radio" name="selectedUser" value="@item.Id" />
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        ---
+                    </td>
+                    <td>
+                        ---
+                    </td>
+                    <td>
+                        ---
+                    </td>
+                    <td>
+                        ---
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section PD{
+    <div style="width:100%;height:100%;">
+        <input type="radio" id="actionActivo" hidden />
+        <ul class="panels-conte">
+            <li>
+                <a asp-area="Act9" asp-controller="Peliculas" asp-action="Añadir">Añadir</a>
+            </li>
+            <li id="conteAction" class="conteAction">
+                <ul class="panels-conte">
+                    <li>
+                        <a id="btnEditar" href="#">Editar</a>
+                    </li>
+                    <li>
+                        <a id="btnDetalle" href="#">Detalle</a>
+                    </li>
+                    <li>
+                        <a id="openBorrar" href="#">Borrar</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+}
+
+<div id="deleteModal" class="modalPrincipal">
+    <div class="contentModal">
+        <span id="deleteCancel" class="cierreModal">&times;</span>
+        <div>
+            <h3>¿Esta seguro de eliminar la pelicula?</h3>
+            <ul class="deleteOpc">
+                <li>
+                    <a href="#" id="btnEliminar">Eliminar</a>
+                </li>
+                <li>
+                    <a href="#" id="cancelDelete">Cancelar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.AppConfig = window.AppConfig || {}; // Crea un objeto que almacena datos globales, es usado para almacenar codigo razor y utilizado en scripts importado
+        window.AppConfig.detailPageUrl = '@Url.Action("Detalles", "Peliculas", new { area = "Act9" })';
+        window.AppConfig.editPageUrl = '@Url.Action("Modificar", "Peliculas", new { area = "Act9" })';
+        window.AppConfig.deletePageUrl = '@Url.Action("Eliminar", "Peliculas", new { area = "Act9" })';
+    </script>
+    <script src="~/js/Act9/peli_index.js" asp-append-version="true"></script>
+}

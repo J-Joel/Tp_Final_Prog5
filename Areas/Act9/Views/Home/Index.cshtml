@@ -1,0 +1,44 @@
+﻿@using TP_Final_Programacion5.Areas.Act9.Models
+@model IEnumerable<Usuario>
+@{
+	ViewData["Title"] = "Inicio";
+}
+@section PI {
+	<div class="panels-conte">
+		<h5>Usuarios</h5>
+		@if (Model != null && Model.Any())
+		{
+			@foreach (var usuario in Model)
+			{
+				<div>@Html.DisplayFor(modelItem => usuario.User)</div>
+			}
+		}
+		else
+		{
+			<div>No hay usuarios registrados</div>
+		}
+	</div>
+}
+
+<div class="conte-Text">
+	<p>Recuerde que puede acceder a la pantalla de bienvenida mediante la URL con 
+		".../home/Welcome"
+	</p>
+</div>
+
+@section PD {
+	<div class="panels-conte">
+		<h5>Usuarios</h5>
+		@if (Model != null && Model.Any())
+		{
+			@foreach (var usuario in Model)
+			{
+				<div>@Html.DisplayFor(modelItem => usuario.User)</div>
+			}
+		}
+		else
+		{
+			<div>No hay usuarios registrados</div>
+		}
+	</div>
+}
