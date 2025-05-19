@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TP_Final_Programacion5.Areas.Act4.Models;
 using TP_Final_Programacion5.Conexion.Act9;
 
 namespace TP_Final_Programacion5.Areas.Act9.Controllers

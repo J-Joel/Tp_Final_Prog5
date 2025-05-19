@@ -12,6 +12,11 @@ namespace TP_Final_Programacion5.Areas.Act9.Controllers
             //TempData["Completado"] = "aaaa";
             //TempData["Error"] = "bbbb";
             //TempData["Advertencia"] = "cccc";
+            if (!MongoDBF.EstablecerConexion())
+            {
+                TempData["Error"] = "Conexion fallida";
+                return View(null);
+            }
             return View(MongoDBF.ListarUsuarios());
         }
         public IActionResult Welcome()

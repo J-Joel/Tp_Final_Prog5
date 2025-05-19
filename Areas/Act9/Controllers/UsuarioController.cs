@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TP_Final_Programacion5.Areas.Act5.Models;
 using TP_Final_Programacion5.Conexion.Act9;
 
 namespace TP_Final_Programacion5.Areas.Act9.Controllers
@@ -12,7 +13,19 @@ namespace TP_Final_Programacion5.Areas.Act9.Controllers
         [Authorize(AuthenticationSchemes = "AreaAct9Cookies")]
         public IActionResult Index()
         {
-            return View();
+            if (!MongoDBF.EstablecerConexion())
+            {
+                TempData["Error"] = "Conexion fallida";
+                return RedirectToAction("Index", "Usuario");
+            }
+            ClaimsPrincipal usuarioAutenticado = HttpContext.User;
+            var usuario = MongoDBF.ExisteUsuario(usuarioAutenticado.Identity.Name);
+            if (usuario == null)
+            {
+                ViewBag.Error = "El usuario ya está registrado";
+                return RedirectToAction("Index", "Usuario");
+            }
+            return View(usuario);
         }
         [HttpGet]
         public IActionResult Login() 

@@ -6,6 +6,7 @@ namespace TP_Final_Programacion5.Conexion.Act9
 {
     static class MongoDBF
     {
+        // Recordar, dar permisos de conexion MongoDB mediante IP fijos o 0.0.0.0/0 (¡Habilita la conexion para cualquiera!)
         static private readonly MongoClient conexion = new(Environment.GetEnvironmentVariable("MONGODB_CONEXION"));
         static private IMongoDatabase? database;
         static private IMongoCollection<Usuario>? usuariodb;
@@ -23,9 +24,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Usuariodb = Database.GetCollection<Usuario>(Environment.GetEnvironmentVariable("TABLAUSUARIO"));
                 Pelidb = Database.GetCollection<Movie>(Environment.GetEnvironmentVariable("TABLAPELICULA"));
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return false;
             }
             return true;
@@ -39,9 +40,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 List<Usuario> lista = Usuariodb.Find(_ => true).ToList();
                 return lista;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }            
         }
@@ -52,9 +53,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Usuario logeado = Usuariodb.Find(u => u.User == usuario && u.Contraseña == contraseña).First();
                 return logeado;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -65,9 +66,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Usuario identificado = Usuariodb.Find(u => u.User == usuario).First();
                 return identificado;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -77,9 +78,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
             {
                 Usuariodb.InsertOneAsync(new Usuario(usuario, contraseña));
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return false;
             }
             return true;
@@ -92,9 +93,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 List<Movie> lista = Pelidb.Find(_ => true).ToList();
                 return lista;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -105,9 +106,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Movie identificado = Pelidb.Find(u => u.Titulo == titulo).First();
                 return identificado;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -117,9 +118,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
             {
                 Pelidb.InsertOneAsync(new Movie(titu, fePubli, gen, pre));
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return false;
             }
             return true;
@@ -131,9 +132,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Movie identificado = Pelidb.Find(u => u.Id == id).First();
                 return identificado;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -150,9 +151,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Pelidb.UpdateOneAsync(filter, update);
                 return true;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -164,9 +165,9 @@ namespace TP_Final_Programacion5.Conexion.Act9
                 Pelidb.DeleteOneAsync(filter);
                 return true;
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.Message);
                 return false;
             }
         }
